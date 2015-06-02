@@ -8,16 +8,20 @@ module Gravatar
       attrs.size ? attrs.size.to_i : 80
     end
 
+    def rating
+      attrs.rating ? attrs.rating : 'pg'
+    end
+
     def gravatar_image_src
       Volt.fetch_current_user.then do |user|
         email_address = user.email.downcase
         GravatarTasks.ms5_hash(email_address).then do
           hash = Digest::MD5.hexdigest(email_address)
           size = image_size ? image_size : 80
-          "//www.gravatar.com/avatar/#{hash}.jpg?s=#{image_size.to_s}&d=#{default_image}"
+          "//www.gravatar.com/avatar/#{hash}.jpg?s=#{image_size.to_s}&d=#{default_image}&r=#{rating}"
         end
       end.fail do
-        "//www.gravatar.com/avatar/00000000000000000000000000000000.jpg?s=#{size.to_s}&d=#{default_image}"
+        "//www.gravatar.com/avatar/00000000000000000000000000000000.jpg?s=#{size.to_s}&d=#{default_image}&r=#{rating}"
       end
 
     end
