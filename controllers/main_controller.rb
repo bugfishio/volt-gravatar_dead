@@ -1,7 +1,7 @@
 module Gravatar
   class MainController < Volt::ModelController
     def default_image
-      attrs.default ? attra.default.to_s : 'mm'
+      attrs.default ? attrs.default.to_s : 'mm'
     end
 
     def image_size
