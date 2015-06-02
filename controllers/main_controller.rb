@@ -15,7 +15,7 @@ module Gravatar
     def gravatar_image_src
       Volt.fetch_current_user.then do |user|
         email_address = user.email.downcase
-        GravatarTasks.ms5_hash(email_address).then do
+        GravatarTasks.md5_hash(email_address).then do
           hash = Digest::MD5.hexdigest(email_address)
           "//www.gravatar.com/avatar/#{hash}.jpg?s=#{image_size.to_s}&d=#{default_image}&r=#{rating}"
         end
