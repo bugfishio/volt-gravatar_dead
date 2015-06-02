@@ -17,7 +17,6 @@ module Gravatar
         email_address = user.email.downcase
         GravatarTasks.ms5_hash(email_address).then do
           hash = Digest::MD5.hexdigest(email_address)
-          size = image_size ? image_size : 80
           "//www.gravatar.com/avatar/#{hash}.jpg?s=#{image_size.to_s}&d=#{default_image}&r=#{rating}"
         end
       end.fail do
