@@ -14,10 +14,10 @@ module Gravatar
         GravatarTasks.ms5_hash(email_address).then do
           hash = Digest::MD5.hexdigest(email_address)
           size = image_size ? image_size : 80
-          "http://www.gravatar.com/avatar/#{hash}.jpg?s=#{image_size.to_s}&d=#{default_image}"
+          "//www.gravatar.com/avatar/#{hash}.jpg?s=#{image_size.to_s}&d=#{default_image}"
         end
       end.fail do
-        "http://www.gravatar.com/avatar/00000000000000000000000000000000.jpg?s=#{size.to_s}&d=#{default_image}"
+        "//www.gravatar.com/avatar/00000000000000000000000000000000.jpg?s=#{size.to_s}&d=#{default_image}"
       end
 
     end
